@@ -10,8 +10,8 @@ var PersonList = [];
 
 var updateId = function(req, res, next) {
     if (req.body.id) {
-        id++;
-        req.body.id = id 
+        KeyId++;
+        req.body.id = KeyId 
     }
     next();
 }
@@ -47,11 +47,9 @@ app.get('/personList/:id', function(req,res){
 
 // ** save one element
 //POST request http://localhost:3000/personList
-app.post('/personList', function(req,res){
+app.post('/personList', updateId, function(req,res){
     var person = req.body;
-    KeyId = KeyId + 1;
     person.ID = KeyId;
-    console.log(person);
     PersonList.push(person);
     res.json(person);n
 });
